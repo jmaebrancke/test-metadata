@@ -1,0 +1,17 @@
+name: Build release image
+on:
+  workflow_dispatch:
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  sigrid-maintainability-publish:
+    runs-on: dcteam
+    steps:
+      - name: Docker Metadata action
+        uses: docker/metadata-action@v4.0.1
+        with:
+          images: alpine
+          tags: |
+            type=semver, pattern={{version}}
+            type=semver, pattern={{major}}.{{minor}}
